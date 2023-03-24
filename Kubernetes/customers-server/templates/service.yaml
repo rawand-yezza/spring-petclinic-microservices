@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+    name: {{ .Release.Name }}-svc
+    namespace: petclinic
+spec:
+    ports:
+    - name: customers-service
+      targetPort: 8081
+      port: {{ .Values.service.port }}
+      protocol: TCP
+    selector:
+       app: customers-service
+    type: {{ .Values.service.type }}
