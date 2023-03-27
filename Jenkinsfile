@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Cloning Git') {
       steps {
-        git 'https://github.com/dsirine/spring-petclinic-microservices.git'
+        git 'https://github.com/rawand-yezza/spring-petclinic-microservices.git'
       }
     }
 
