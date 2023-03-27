@@ -13,15 +13,11 @@ pipeline {
           docker info
           docker compose version
           curl --version
-          jq --version
+          
         '''
        }
     }
-    stage ('Prune docker data'){
-      steps  {
-        sh 'docker system prune -a --volumes -f'
-      }
-    }
+    
     stage('Start containers') {
       steps {
         sh 'docker-compose up -d'
