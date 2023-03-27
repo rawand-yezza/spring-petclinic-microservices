@@ -11,8 +11,7 @@ pipeline {
       steps {
         sh '''
           docker version
-          docker info
-
+          
           curl --version
           
         '''
