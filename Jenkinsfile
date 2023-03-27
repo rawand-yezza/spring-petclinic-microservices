@@ -10,7 +10,7 @@ pipeline {
     stage('Verify tooling') {
       steps {
         sh '''
-          docker version
+         
           
           curl --version
           
