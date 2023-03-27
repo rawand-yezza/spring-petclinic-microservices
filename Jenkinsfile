@@ -11,7 +11,7 @@ pipeline {
       steps {
         sh '''
          
-          
+          docker version 
           curl --version
           
         '''
