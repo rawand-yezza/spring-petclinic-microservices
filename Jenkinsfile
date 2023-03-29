@@ -6,7 +6,6 @@ pipeline {
         git 'https://github.com/rawand-yezza/spring-petclinic-microservices.git'
       }
     }
-
     stage('Verify tooling') {
        steps {
         sh '''
@@ -28,18 +27,21 @@ pipeline {
         sh 'docker-compose ps'
       }
     }
-    stage('Run tests again the container') {
+    stage('check version') {
       steps {
-        sh 'curl http://localhost:8888/'
-        sh 'curl http://localhost:8761/'
-        sh 'curl http://localhost:9090/'
-        sh 'curl http://localhost:8080/'
-        sh 'curl http://localhost:8081/'
-        sh 'curl http://localhost:3000/'
-        sh 'curl http://localhost:9091/'
-        sh 'curl http://localhost:9411/'
-        sh 'curl http://localhost:8083/'
-        sh 'curl http://localhost:8082/'
+        sh 'aws --version'
+      }
+    }
+    stage('Deploy to AWS') {
+      steps {
+        withCredentials([[
+          $class: 'AmazonWebServicesCredentialsBinding',
+          accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+          secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
+          credentialsId: 'petclinic'
+        ]]) {
+          sh './run_cloudformation.sh'
+        }
       }
     }
   }
@@ -48,5 +50,9 @@ pipeline {
       sh 'docker-compose down --remove orphans -v'
       sh 'docker-compose ps'
     }
+    always {
+      sh 'aws cloudformation delete-stack --stack-name petclinic'
+    }
   }
 }
+
