@@ -50,9 +50,7 @@ pipeline {
       sh 'docker-compose down --remove orphans -v'
       sh 'docker-compose ps'
     }
-    always {
-      sh 'aws cloudformation delete-stack --stack-name petclinic'
-    }
+    
   }
 }
 
