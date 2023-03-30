@@ -20,6 +20,7 @@ pipeline {
     stage('check version') {
       steps {
         sh 'aws --version'
+        echo 'test'
       }
     }
     stage('Deploy to AWS') {
