@@ -16,17 +16,7 @@ pipeline {
         '''  
        }
     }
-    stage ('Prune docker data'){
-      steps  {
-        sh 'docker system prune -a --volumes -f'
-      }
-    }
-    stage('Start containers') {
-      steps {
-        sh 'docker-compose up -d'
-        sh 'docker-compose ps'
-      }
-    }
+   
     stage('check version') {
       steps {
         sh 'aws --version'
