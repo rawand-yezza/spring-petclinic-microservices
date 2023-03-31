@@ -1,5 +1,4 @@
 # Distributed version of the Spring PetClinic Sample Application built with Spring 
-## starting locally with docker compose
 
 ## Starting services locally with Docker-compose 
 
