@@ -1,0 +1,85 @@
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: petclinic-ingress
+
+  namespace: petclinic
+spec:
+  ingressClassName: traefik
+  
+  rules:
+  - host: projet-petclinic.module-datascientest.cloudns.ph 
+    http:
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+             service:
+              name: discovery-server-svc
+              port:
+                number: 32324
+        - path: /config-server
+          pathType: Prefix
+          backend:
+             service:
+              name: config-server-svc
+              port:
+                number: 30772
+        - path: /tracing-server
+          pathType: Prefix
+          backend:
+             service:
+              name: tracing-server-svc
+              port:
+                number: 30260
+        - path: /grafana-server
+          pathType: Prefix
+          backend:
+             service:
+              name: grafana-server-svc
+              port:
+                number: 32465               
+        - path: /prometheus-server
+          pathType: Prefix
+          backend:
+             service:
+              name: prometheus-server-svc
+              port:
+                number: 32072
+        - path: /api-gateway
+          pathType: Prefix
+          backend:
+             service:
+              name: api-gateway-svc
+              port:
+                number: 31264
+        - path: /admin-server
+          pathType: Prefix
+          backend:
+             service:
+              name: admin-server-svc
+              port:
+                number: 30472  
+        - path: /vets-service
+          pathType: Prefix
+          backend:
+             service:
+              name: vets-service-svc
+              port:
+                number: 30761 
+        - path: /visits-service
+          pathType: Prefix
+          backend:
+             service:
+              name: visits-service-svc
+              port:
+                number: 31391     
+        - path: /customers-server
+          pathType: Prefix
+
+          backend:
+             service:
+              name: customers-server-svc
+              port:
+                number: 32603        
