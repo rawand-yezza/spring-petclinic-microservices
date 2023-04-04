@@ -1,16 +1,10 @@
-# Distributed version of the Spring PetClinic Sample Application built with Spring 
+# Distributed version of the Spring PetClinic microservice using CI/CD pipline 
 
-## Starting services locally with Docker-compose 
-
-In order to start entire infrastructure using Docker, you have to build images by executing `./mvnw clean install -P buildDocker` 
-from a project root. Once images are ready, you can start them with a single command
-`docker-compose up`.
-After starting services, it takes a while for API Gateway to be in sync with service registry,
-so don't be scared of initial Spring Cloud Gateway timeouts. You can track services availability using Eureka dashboard
-available by default at http://localhost:8761.
-Every microservice is a Spring Boot application expose amount of services in ower application we can find that supporting services:Config and Discovery Server must be started before any other application:Customers, Vets, Visits and API.
-Startup of Tracing server, Admin server, Grafana and Prometheus is optional.
-If everything goes well, you can access the following services at given location:
+## Starting services locally with docker-compose
+In order to start entire infrastructure using Docker, you have to build images by executing from a project root:
+`./mvnw clean install -P buildDocker` then
+`docker-compose up`. 
+ You can reach all services as following:
 * Discovery Server - http://localhost:8761
 * Config Server - http://localhost:8888
 * AngularJS frontend (API Gateway) - http://localhost:8080
@@ -52,7 +46,48 @@ docker run -e MYSQL_ROOT_PASSWORD=petclinic -e MYSQL_DATABASE=petclinic -p 3306:
 ```
 or download and install the MySQL database (e.g., MySQL Community Server 5.7 GA), which can be found here: https://dev.mysql.com/downloads/
 
+## Jenkins
+In order to change Jenkins Port Number From 8080 To Any Port Number(9999), to Avoid Conflict Of Other Services because Default Port No. 8080 For Jenkins and many Other services is same, you can just follow this steps: 
+```
+`nano /etc/default/jenkins`  
 
+change `HTTP_PORT = 8080` to `HTTP_PORT = 9999`  
+
+save file and now change Dir. to `sudo nano /lib/systemd/system/jenkins.service`  
+
+change Environment ="JENKINS_PORT=8080" to Previously written Port No.  
+
+`Environment="JENKINS_PORT=9999"`  
+
+and now:  
+
+`sudo systemctl restart jenkins.service`  
+
+You can check the url of jenkins on http://localhost:9999  
+
+```
+#### Integrate GitHub Repository to Jenkins: 
+
+To integrate Jenkins and GitHub to improve the efficiency of building, testing, and deploying your code, you should to schedule your build, pull code and data files from GitHub repository to Jenkins machine, by adding a `webhook` and the select Pushes trigger event with my repository and you have to install `ngrok` to give public url.  
+### Configuring Jenkins  
+To configure jenkins with aws, you should to install the pluguin `aws` in jenkins manger and the add `aws credential`  to jenkins credential
+
+## Cloudformation
+To build our infrastructure , you can execute this command from CloudFormation folder  
+
+`aws cloudformation create-stack --stack-name petclinic --region eu-west-3 --template-body file://network.yml --parameters file://network.json --capabilities CAPABILITY_NAMED_IAM`
+## Kubernetes
+In order to deploy our project in K8S, you should install all ressources via Helm Chart by executing the script run_kubernetes.sh as follow:  
+
+`chmod +x run_kubernetes.sh`  
+
+`./run_kubernetes.sh`  
+
+you can check all ressources in petclinic namespace:  
+
+`kubens petclinic`  
+
+`kubectl get all`  
 
 ## Custom metrics monitoring
 
@@ -62,19 +97,14 @@ have been instrumented with [MicroMeter](https://micrometer.io) to collect JVM a
 A JMeter load testing script is available to stress the application and generate metrics: [petclinic_test_plan.jmx](spring-petclinic-api-gateway/src/test/jmeter/petclinic_test_plan.jmx)
 
 ![Grafana metrics dashboard](docs/grafana-custom-metrics-dashboard.png)
-### Continuius integratio CI with jekins 
- Automatisation of the the build/ deployemet of the project with multiple stage withe the integration of the github plateform and finaly we can find the deployemet pf ouw infrastructure with cloud : AWS cloudFormatopn service 
-### Deployement with Kubernetes 
+
+
 
 ### Using Prometheus
 
 * Prometheus can be accessed from your local machine at http://localhost:9091
 
 ### Using Grafana with Prometheus
-
+ Grafana is UI of dashboarding of prometheus metrics using  PromQL query.
 * An anonymous access and a Prometheus datasource are setup.
 * A `Spring Petclinic Metrics` Dashboard is available at the URL http://localhost:3000/d/69JXeR0iw/spring-petclinic-metrics.
-You will find the JSON configuration file here: [docker/grafana/dashboards/grafana-petclinic-dashboard.json]().
-* You may create your own dashboard or import the [Micrometer/SpringBoot dashboard](https://grafana.com/dashboards/4701) via the Import Dashboard menu item.
-The id for this dashboard is `4701`.
-
