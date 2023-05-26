@@ -15,7 +15,7 @@ pipeline {
           curl --version
           aws --version
           eksctl version
-          kubectl version --short --client
+          kubectl version --client --output=yaml
         '''  
        }
     }
@@ -32,7 +32,7 @@ pipeline {
           secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
           credentialsId: 'petclinic'
         ]]) {
-          sh 'eksctl create cluster --name petclinic --version 1.25 --region eu-west-3 --nodegroup-name standard-workers --node-type t3.micro --nodes 4 --nodes-min 4 --nodes-max 6'
+          sh 'eksctl create cluster --name petclinic --version 1.24 --region eu-west-3 --nodegroup-name standard-workers --node-type t3.micro --nodes 4 --nodes-min 4 --nodes-max 6'
         }
       }
     }
