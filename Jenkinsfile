@@ -1,7 +1,7 @@
 pipeline {
   agent any
-  stages {
-    stage('Cloning Git') {
+   stages {
+   /* stage('Cloning Git') {
       steps {
         git 'https://github.com/rawand-yezza/spring-petclinic-microservices.git'
       }
@@ -35,9 +35,15 @@ pipeline {
           sh 'eksctl create cluster --name petclinic --version 1.24 --region eu-west-3 --nodegroup-name standard-workers --node-type t3.micro --nodes 4 --nodes-min 4 --nodes-max 6'
         }
       }
-    }
+    } */
     stage ('Check the cluster'){
       steps  {
+         withCredentials([[
+          $class: 'AmazonWebServicesCredentialsBinding',
+          accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+          secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
+          credentialsId: 'petclinic'
+        ]])
         sh 'eksctl get cluster'
       }
     }
