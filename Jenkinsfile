@@ -1,12 +1,12 @@
 pipeline {
   agent any
    stages {
-   /* stage('Cloning Git') {
+    stage('Cloning Git') {
       steps {
         git 'https://github.com/rawand-yezza/spring-petclinic-microservices.git'
       }
     }
-    stage('Verify tooling') {
+    /*stage('Verify tooling') {
        steps {
         sh '''
           docker version
