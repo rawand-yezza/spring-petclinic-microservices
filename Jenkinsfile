@@ -69,6 +69,7 @@ pipeline {
     }
     stage ('Deploy resources in k8s'){
       steps  {
+        sh 'sudo chmod 777 run_kubernetes.sh'
         sh './run_kubernetes.sh'
       }
     } 
