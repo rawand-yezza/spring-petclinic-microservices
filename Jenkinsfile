@@ -24,7 +24,7 @@ pipeline {
         sh 'docker system prune -a --volumes -f'
       }
     }
-      stage('Deploy to AWS') {
+    stage('Deploy to AWS') {
       steps {
         withCredentials([[
           $class: 'AmazonWebServicesCredentialsBinding',
