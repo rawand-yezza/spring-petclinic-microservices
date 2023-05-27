@@ -28,14 +28,14 @@ pipeline {
     stage('Deploy to AWS') {
       steps {
         sh 'test deploy'
-       /*  withCredentials([[
+        withCredentials([[
           $class: 'AmazonWebServicesCredentialsBinding',
           accessKeyVariable: 'AWS_ACCESS_KEY_ID',
           secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
           credentialsId: 'petclinic'
         ]]) {
           sh 'eksctl create cluster --name petclinic --version 1.25 --region eu-west-3 --nodegroup-name standard-workers --node-type t3.micro --nodes 4 --nodes-min 4 --nodes-max 6 --managed'
-        } */
+        } 
       }
     } 
    /*  stage ('Check the cluster'){
