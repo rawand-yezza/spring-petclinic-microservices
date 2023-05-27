@@ -6,7 +6,7 @@ pipeline {
         git 'https://github.com/rawand-yezza/spring-petclinic-microservices.git'
       }
     }
-    /*stage('Verify tooling') {
+    stage('Verify tooling') {
        steps {
         sh '''
           docker version
@@ -35,20 +35,20 @@ pipeline {
           sh 'eksctl create cluster --name petclinic --version 1.24 --region eu-west-3 --nodegroup-name standard-workers --node-type t3.micro --nodes 4 --nodes-min 4 --nodes-max 6'
         }
       }
-    } */
+    }
     stage ('Check the cluster'){
       steps  {
         
-         /* withCredentials([[
+          withCredentials([[
           $class: 'AmazonWebServicesCredentialsBinding',
           accessKeyVariable: 'AWS_ACCESS_KEY_ID',
           secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
           credentialsId: 'petclinic'
-        ]])*/
+        ]])
         sh 'eksctl get cluster' 
       }
     }
-    stage ('Enable to connect to the cluster'){
+    /* stage ('Enable to connect to the cluster'){
       steps  {
         sh 'aws eks update-kubeconfig --name petclinic --region eu-west-3'
       }
@@ -57,7 +57,7 @@ pipeline {
       steps  {
         sh './run_kubernetes.sh'
       }
-    }
+    } */
     stage ('curl'){
       steps  {
         sh 'curl http://localhost:8761'
