@@ -24,19 +24,19 @@ pipeline {
         sh 'docker system prune -a --volumes -f'
       }
     }
-       stage('Deploy to AWS') {
-       steps {
-         withCredentials([[
-           $class: 'AmazonWebServicesCredentialsBinding',
-           accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-           secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
-           credentialsId: 'petclinic'
-         ]]) {
-          sh 'eksctl create cluster --name petclinic --version 1.24 --region eu-west-3 --nodegroup-name standard-workers --node-type t3.micro --nodes 4 --nodes-min 4 --nodes-max 6 --managed '
-         }
-       }
-     }
-   /*  stage ('Check the cluster'){
+    /*   stage('Deploy to AWS') {
+      steps {
+        withCredentials([[
+          $class: 'AmazonWebServicesCredentialsBinding',
+          accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+          secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
+          credentialsId: 'petclinic'
+        ]]) {
+          sh 'eksctl create cluster --name petclinic --version 1.24 --region eu-west-3 --nodegroup-name standard-workers --node-type t3.micro --nodes 4 --nodes-min 4 --nodes-max 6 --managed'
+        }
+      }
+    } */
+    stage ('Check the cluster'){
       steps  {
         
           withCredentials([[
@@ -45,10 +45,14 @@ pipeline {
           secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
           credentialsId: 'petclinic'
         ]])
+        sh 'HELLO'
         sh 'eksctl get cluster' 
+
+
+
       }
-    } */
-  stage ('Enable to connect to the cluster'){
+    }
+    /* stage ('Enable to connect to the cluster'){
       steps  {
         sh 'aws eks update-kubeconfig --name petclinic --region eu-west-3'
       }
@@ -57,25 +61,12 @@ pipeline {
       steps  {
         sh './run_kubernetes.sh'
       }
-    } 
-      stage ('Deploy to EKS'){
-      steps  {
-        withCredentials([[
-          $class: 'AmazonWebServicesCredentialsBinding',
-          accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-          secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
-          credentialsId: 'petclinic'
-        ]])
-        dir('Kubernetes') {
-            sh './run_kubernetes.sh'
-        }
-      }
-    }
-     stage ('curl'){
+    } */
+    /* stage ('curl'){
       steps  {
         sh 'curl http://localhost:8761'
       }
-    } 
+    } */
   }
   post {
     always {
