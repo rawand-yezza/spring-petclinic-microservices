@@ -69,8 +69,15 @@ pipeline {
     }
     stage ('Deploy resources in k8s'){
       steps  {
+        withCredentials([[
+          $class: 'AmazonWebServicesCredentialsBinding',
+          accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+          secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
+          credentialsId: 'petclinic'
+        ]]){
         sh 'chmod 777 run_kubernetes.sh'
         sh './run_kubernetes.sh'
+        }
       }
     } 
      stage ('curl'){
