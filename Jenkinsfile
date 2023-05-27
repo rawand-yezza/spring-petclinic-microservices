@@ -25,7 +25,7 @@ pipeline {
         sh 'docker system prune -a --volumes -f'
       }
     }
-    stage('Deploy to AWS') {
+   /*  stage('Deploy to AWS') {
       steps {
         sh 'test deploy'
         withCredentials([[
@@ -38,8 +38,8 @@ pipeline {
           sh 'test eks '        
         } 
       }
-    } 
-   /*  stage ('Check the cluster'){
+    }  */
+     /* stage ('Check the cluster'){
       steps  {
         
           withCredentials([[
@@ -50,13 +50,13 @@ pipeline {
         ]])
         sh 'HELLO'
         sh 'aws eks update-kubeconfig --name project --region eu-west-3'
-        sh 'eksctl get cluster' 
+        //sh 'eksctl get cluster' 
 
 
 
       }
-    }  */
-    /* stage ('Enable to connect to the cluster'){
+    } */  
+     stage ('Enable to connect to the cluster'){
       steps  {
         sh 'aws eks update-kubeconfig --name petclinic --region eu-west-3'
       }
@@ -65,12 +65,12 @@ pipeline {
       steps  {
         sh './run_kubernetes.sh'
       }
-    } */
-    /* stage ('curl'){
+    } 
+     stage ('curl'){
       steps  {
         sh 'curl http://localhost:8761'
       }
-    } */
+    } 
   }
   post {
     always {
