@@ -36,7 +36,7 @@ pipeline {
         }
       }
     } */
-    stage ('Check the cluster'){
+   /*  stage ('Check the cluster'){
       steps  {
         
           withCredentials([[
@@ -46,12 +46,12 @@ pipeline {
           credentialsId: 'petclinic'
         ]])
         sh 'HELLO'
-        // sh 'eksctl get cluster' 
+        /sh 'eksctl get cluster' 
 
 
 
       }
-    }
+    } */
     /* stage ('Enable to connect to the cluster'){
       steps  {
         sh 'aws eks update-kubeconfig --name petclinic --region eu-west-3'
