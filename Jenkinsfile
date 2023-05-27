@@ -46,7 +46,7 @@ pipeline {
           credentialsId: 'petclinic'
         ]])
         sh 'HELLO'
-        sh 'eksctl get cluster' 
+        // sh 'eksctl get cluster' 
 
 
 
