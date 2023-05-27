@@ -58,16 +58,17 @@ pipeline {
         sh './run_kubernetes.sh'
       }
     } */
-    stage ('curl'){
+   /*  stage ('curl'){
       steps  {
         sh 'curl http://localhost:8761'
       }
     }
-  }
+  } */
   post {
     always {
       sh 'docker-compose down --remove orphans -v'
       sh 'docker-compose ps'
     }
   }
+}
 }
