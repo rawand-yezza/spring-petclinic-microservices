@@ -24,7 +24,7 @@ pipeline {
         sh 'docker system prune -a --volumes -f'
       }
     }
-      stage('Deploy to AWS') {
+    /*   stage('Deploy to AWS') {
       steps {
         withCredentials([[
           $class: 'AmazonWebServicesCredentialsBinding',
@@ -35,7 +35,7 @@ pipeline {
           sh 'eksctl create cluster --name petclinic --version 1.24 --region eu-west-3 --nodegroup-name standard-workers --node-type t3.micro --nodes 4 --nodes-min 4 --nodes-max 6'
         }
       }
-    }
+    } */
     stage ('Check the cluster'){
       steps  {
         
