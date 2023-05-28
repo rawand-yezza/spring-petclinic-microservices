@@ -25,7 +25,7 @@ pipeline {
         sh 'docker system prune -a --volumes -f'
       }
     }
-    stage('Deploy to AWS') {
+   /*  stage('Deploy to AWS') {
       steps {
         sh 'test deploy'
         withCredentials([[
@@ -38,7 +38,7 @@ pipeline {
           sh 'test eks '        
         } 
       }
-    }  
+    }   */
      /* stage ('Check the cluster'){
       steps  {
         
@@ -56,7 +56,7 @@ pipeline {
 
       }
     } */  
-     stage ('Enable to connect to the cluster'){
+/*      stage ('Enable to connect to the cluster'){
       steps  {
         withCredentials([[
           $class: 'AmazonWebServicesCredentialsBinding',
@@ -66,7 +66,7 @@ pipeline {
         ]]){
         sh 'aws eks update-kubeconfig --name petclinic --region eu-west-3'
       }}
-    }
+    } */
     stage ('Deploy resources in k8s'){
       steps  {
         withCredentials([[
