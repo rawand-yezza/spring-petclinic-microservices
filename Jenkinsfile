@@ -76,7 +76,7 @@ pipeline {
           credentialsId: 'petclinic'
         ]]){
         sh 'chmod 777 run_kubernetes.sh'
-        sh './run_kubernetes.sh'
+        sh './Kubernetes/run_kubernetes.sh'
         }
       }
     } 
