@@ -25,7 +25,7 @@ pipeline {
         sh 'docker system prune -a --volumes -f'
       }
     }
-   /*  stage('Deploy to AWS') {
+    stage('Deploy to AWS') {
       steps {
         sh 'test deploy'
         withCredentials([[
@@ -38,7 +38,7 @@ pipeline {
           sh 'test eks '        
         } 
       }
-    }  */
+    }  
      /* stage ('Check the cluster'){
       steps  {
         
