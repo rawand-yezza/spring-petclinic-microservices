@@ -46,13 +46,13 @@ pipeline {
           $class: 'AmazonWebServicesCredentialsBinding',
           accessKeyVariable: 'AWS_ACCESS_KEY_ID',
           secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
-          secretKeyVariable: 'AWS_DEFAULT_REGION',
+
           credentialsId: 'petclinic'
         ]]){
         
         sh 'aws eks update-kubeconfig --name petclinic --region eu-west-3'
-        sh 'eksctl get cluster'
-        sh 'test' 
+       // sh 'eksctl get cluster'
+        sh 'export AWS_DEFAULT_REGION=eu-west-3' 
         }
 
 
