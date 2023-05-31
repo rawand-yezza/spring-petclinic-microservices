@@ -25,7 +25,7 @@ pipeline {
         sh 'docker system prune -a --volumes -f'
       }
     }
-   /*  stage('Deploy to AWS') {
+     stage('Deploy to AWS') {
       steps {
         sh 'test deploy'
         withCredentials([[
@@ -34,12 +34,12 @@ pipeline {
           secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
           credentialsId: 'petclinic'
         ]]) {
-          sh 'eksctl create cluster --name petclinic --version 1.24 --region eu-west-3 --nodegroup-name standard-workers --node-type t3.micro --nodes 4 --nodes-min 4 --nodes-max 6 --managed'
+          sh 'eksctl create cluster --name petclinic --version 1.24 --region eu-west-3 --nodegroup-name standard-workers --node-type t3.micro --nodes 4 --nodes-min 2 --nodes-max 6 --managed'
           sh 'test eks '        
         } 
       }
-    }   */
-     /* stage ('Check the cluster'){
+    }   
+      stage ('Check the cluster'){
       steps  {
         
           withCredentials([[
@@ -49,7 +49,7 @@ pipeline {
           credentialsId: 'petclinic'
         ]])
         sh 'HELLO'
-        sh 'aws eks update-kubeconfig --name project --region eu-west-3'
+        sh 'aws eks update-kubeconfig --name petclinic --region eu-west-3'
         //sh 'eksctl get cluster' 
 
 

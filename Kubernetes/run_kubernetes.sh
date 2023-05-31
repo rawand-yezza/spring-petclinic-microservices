@@ -1,7 +1,7 @@
 #create namespace petclinic 
 
 kubectl create ns petclinic
-helm upgrade --install config-server config-server --values=./config-server/values.yaml 
+helm upgrade --install config-server config-server --values=./Kubernetes/config-server/values.yaml 
 helm upgrade --install discovery-server discovery-server --values=./discovery-server/values.yaml
 helm upgrade --install customers-server customers-server --values=./customers-server/values.yaml
 helm upgrade --install visits-service visits-service --values=./visits-service/values.yaml
