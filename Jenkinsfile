@@ -68,7 +68,7 @@ pipeline {
         sh 'aws eks update-kubeconfig --name petclinic --region eu-west-3'
       }}
     } */
-   /*  stage ('Deploy resources in k8s'){
+    stage ('Deploy resources in k8s'){
       steps  {
         withCredentials([[
           $class: 'AmazonWebServicesCredentialsBinding',
@@ -80,12 +80,12 @@ pipeline {
         sh './Kubernetes/run_kubernetes.sh'
         }
       }
-    }  */
-     stage ('curl'){
+    }  
+   /*   stage ('curl'){
       steps  {
         sh 'curl http://localhost:8761'
       }
-    } 
+    } */ 
   }
   post {
     always {
