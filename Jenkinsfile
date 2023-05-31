@@ -50,12 +50,12 @@ pipeline {
         ]])
         sh 'HELLO'
         sh 'aws eks update-kubeconfig --name petclinic --region eu-west-3'
-        //sh 'eksctl get cluster' 
+        sh 'eksctl get cluster' 
 
 
 
       }
-    } */  
+    } 
 /*      stage ('Enable to connect to the cluster'){
       steps  {
         withCredentials([[
