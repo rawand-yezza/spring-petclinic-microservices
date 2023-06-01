@@ -1,16 +1,16 @@
 #create namespace petclinic 
 
-#kubectl create ns petclinic
+kubectl create ns petclinic
 helm upgrade --install config-server ./Kubernetes/config-server --values=./Kubernetes/config-server/values.yaml 
 helm upgrade --install discovery-server ./Kubernetes/discovery-server --values=./Kubernetes/discovery-server/values.yaml
-helm upgrade --install customers-server customers-server --values=./customers-server/values.yaml
-helm upgrade --install visits-service visits-service --values=./visits-service/values.yaml
-helm upgrade --install vets-service vets-service --values=./vets-service/values.yaml
-helm upgrade --install api-gateway api-gateway --values=./api-gateway/values.yaml
-helm upgrade --install tracing-server tracing-server --values=./tracing-server/values.yaml
-helm upgrade --install admin-server admin-server --values=./admin-server/values.yaml
-helm upgrade --install grafana-server grafana-server --values=./grafana-server/values.yaml
-helm upgrade --install prometheus-server prometheus-server --values=./prometheus-server/values.yaml
+# helm upgrade --install customers-server customers-server --values=./customers-server/values.yaml
+# helm upgrade --install visits-service visits-service --values=./visits-service/values.yaml
+# helm upgrade --install vets-service vets-service --values=./vets-service/values.yaml
+# helm upgrade --install api-gateway api-gateway --values=./api-gateway/values.yaml
+# helm upgrade --install tracing-server tracing-server --values=./tracing-server/values.yaml
+# helm upgrade --install admin-server admin-server --values=./admin-server/values.yaml
+helm upgrade --install grafana-server ./Kubernetes/grafana-server --values=./Kubernetes/grafana-server/values.yaml
+helm upgrade --install prometheus-server ./Kubernetes/prometheus-server --values=./Kubernetes/prometheus-server/values.yaml
 #kubectl create namespace petclinic 
 # kunens petclinic 
 # helm install config-server config-server/ --values=./config-server/values.yaml
