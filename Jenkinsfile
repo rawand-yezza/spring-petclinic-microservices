@@ -55,8 +55,8 @@ pipeline {
         }
 
 
-      } */
-    } 
+      } 
+    } */
      stage ('Enable to connect to the cluster'){
       steps  {
         withCredentials([[
