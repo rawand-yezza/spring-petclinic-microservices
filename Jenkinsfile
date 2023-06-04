@@ -25,7 +25,13 @@ pipeline {
         sh 'docker system prune -a --volumes -f'
       }
     }
-    stage('Deploy to AWS') {
+    stage('Start containers') {
+      steps {
+        sh 'docker-compose up -d'
+        sh 'docker-compose ps'
+      }
+    }
+    /* stage('Deploy to AWS') {
       steps {
         sh 'test deploy'
         withCredentials([[
@@ -38,7 +44,7 @@ pipeline {
           sh 'test eks '        
         } 
       }
-    }   
+    }  */  
       /* stage ('Check the cluster'){
       steps  {
         
@@ -57,7 +63,7 @@ pipeline {
 
       } 
     } */
-     stage ('Enable to connect to the cluster'){
+     /* stage ('Enable to connect to the cluster'){
       steps  {
         withCredentials([[
           $class: 'AmazonWebServicesCredentialsBinding',
@@ -80,7 +86,7 @@ pipeline {
         sh './Kubernetes/run_kubernetes.sh'
         }
       }
-    }  
+    }   */
    /*   stage ('curl'){
       steps  {
         sh 'curl http://localhost:8761'

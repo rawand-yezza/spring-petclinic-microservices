@@ -9,7 +9,7 @@ spec:
   ingressClassName: traefik
   
   rules:
-  - host: projet-petclinic.module-datascientest.cloudns.ph 
+  - host: projet-petclinic.module-datascientest.cloudns.ph
     http:
       paths:
         - path: /
