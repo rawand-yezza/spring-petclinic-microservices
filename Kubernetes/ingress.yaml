@@ -3,13 +3,19 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: petclinic-ingress
-
   namespace: petclinic
+  #annotations:
+    #kubernetes.io/ingress.class: nginx
+    #cert-manager.io/cluster-issuer: letsencrypt-prod
+ 
 spec:
-  ingressClassName: traefik
-  
+  ingressClassName:   nginx #traefik
+  tls:
+    - hosts:
+        - petclinic.module-datascientest.cloudns.ph
+      secretName: tls-2048-kibana
   rules:
-  - host: projet-petclinic.module-datascientest.cloudns.ph
+  - host: petclinic.module-datascientest.cloudns.ph
     http:
       paths:
         - path: /
@@ -18,14 +24,14 @@ spec:
              service:
               name: discovery-server-svc
               port:
-                number: 32324
+                number: 8761
         - path: /config-server
           pathType: Prefix
           backend:
              service:
               name: config-server-svc
               port:
-                number: 30772
+                number: 32263
         - path: /tracing-server
           pathType: Prefix
           backend:

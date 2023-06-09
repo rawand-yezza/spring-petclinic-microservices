@@ -1,6 +1,6 @@
 #kubectl create   ns petclinic
 helm install  config-server config-server/ --values=./config-server/values.yaml
-helm install  config-server discovery-server/ --values=./discovery-server/values.yaml
+helm install  discovery-server discovery-server/ --values=./discovery-server/values.yaml
 helm install  customers-service customers-service/ --values=./customers-service/values.yaml
 helm install  visits-service visits-service/ --values=./visits-service/values.yaml
 helm install  vets-service vets-service/ --values=./vets-service/values.yaml
