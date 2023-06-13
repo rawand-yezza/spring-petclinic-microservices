@@ -31,7 +31,7 @@ pipeline {
         sh 'docker-compose ps'
       }
     }
-     stage('Deploy to AWS') {
+    /*  stage('Deploy to AWS') {
       steps {
         sh 'test deploy'
         withCredentials([[
@@ -86,7 +86,7 @@ pipeline {
         sh './Kubernetes/run_kubernetes.sh'
         }
       }
-    }   
+    }    */
    /*   stage ('curl'){
       steps  {
         sh 'curl http://localhost:8761'
