@@ -95,7 +95,7 @@ pipeline {
   }
   post {
     always {
-       //sh 'curl http://localhost:8761'
+      sh 'curl http://localhost:8761'
       sh 'docker-compose down --remove orphans -v'
       sh 'docker-compose ps'
     }
